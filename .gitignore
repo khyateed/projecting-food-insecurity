@@ -1,0 +1,14 @@
+datasets/
+
+__pycache__/
+
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# macOS Files
+.DS_Store
