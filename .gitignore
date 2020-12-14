@@ -12,3 +12,5 @@ ipython_config.py
 
 # macOS Files
 .DS_Store
+
+notebooks/..datasets\\cleaned_data.csv
