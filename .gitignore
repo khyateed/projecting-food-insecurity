@@ -14,3 +14,4 @@ ipython_config.py
 .DS_Store
 
 notebooks/..datasets\\cleaned_data.csv
+notebooks/..pickled\partially_cleaned_data.pickle
