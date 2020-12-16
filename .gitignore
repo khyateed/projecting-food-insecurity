@@ -16,3 +16,4 @@ ipython_config.py
 # datasets and pickled
 datasets/
 pickled/partially_cleaned_data.pickle
+pickled/feature_engineered_data.pickle
