@@ -35,9 +35,45 @@ The datasets much undergo several important  pre-processing steps before EDA or 
 - impute missing values 
 - adjust datatypes
 - reformat each dataframe in a standardized pattern
-- concatenate all 6 dataframes into a main dataset
+- concatenate all 6 dataframes into a main dataset:.
 
-For a detailed walkthrough of this process, please view [cleaning_pt1.ipynb](notebooks/cleaning_pt1.ipynb) and [cleaning_pt2.ipynb](notebooks/cleaning_pt2.ipynb).
+
+
+
+### Data Dictionary
+| FEATURE        |   DESCRIPTION     |   DATA TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|-------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| FIPS | County level identification code (also referred to as GEOID|str|
+|Rent | Average 1-Br Rent price | float|
+|Year | Year data was collected | str
+|coc_number | Continuum of Care (CoC) number - corresponds to houselessness data | str
+|Houseless_rate | Percent of population within the county that is houseless | float
+|Sheltered_rate | Percent of the population of a county that is houseless and resides in a shelter | float
+|Unsheltered_rate | Percent of the population of a county that is houseless and does not reside in a shelter |float
+|State | US State name | str
+|County| County name | str
+|TOT_POP | Population count within a county | float
+|TOT_MALE | Count of all males| float
+|TOT_FEMALE |Count of all females | float
+|TOT_WHITE | Count of all white people within a county |float
+|TOT_BLACK| count of all Black people within a county|float
+|TOT_NATIVE| count of all Indigenous people within a county| float
+|TOT_ASIAN| count of all Asian people within a county|float
+|TOT_PACIFIC|count of all Pacific Islander people within a county|float
+|TOT_LATINX| count of all LatinX people within a county|float
+|State/County| State/County combination| str
+|FI Rate| Percent of population within a county that is food insecure (target variable) | float
+|Low Threshold Type| Low threshold food assistance programs by State| str
+|High Threshold Type| High threshold food assistance programs by State| str
+|Cost Per Meal| Average cost per meal| float
+|Num_wholesale| Number of wholesale business within a county|float
+|Num_restaraunts| Number of restaurants and cafes within a county| float
+|Num_grocery | Number of grocery stores and markets within a county|float
+|Total_workforce| Total number of people within a county who are able to legally work| float
+|Employed | Total number of people within a county who are employed|float
+|Unemployed| Total number of people within a county who are unemployed | float
+|Unemployment_rate |Percent of the total workforce within a county that is unemployed|float                                                                                                         |
+For a detailed walkthrough of the cleaning process used to derive this cleaned dataset, please view [cleaning_pt1.ipynb](notebooks/cleaning_pt1.ipynb) and [cleaning_pt2.ipynb](notebooks/cleaning_pt2.ipynb).
 # Exploratory Data Analysis
 This project focuses on projecting future FI rates, at the county level. This means that both **time** and **geography** are important components of understanding the data. The [EDA notebook](notebooks/EDA.ipynb) addresses 3 questions to help gain a better understanding of food insecurity, and how it relates to time and geography:<br>
 
@@ -47,19 +83,23 @@ The first EDA question explores how different features from the original dataset
 Each feature group is scaled to the same magnitude, and visualized using lineplots or/and barcharts. The productions of these charts with multiple variables is accomplished using two functions: [`lineplot()`](src/functions.py) and [`barchart()`](src/functions.py), both of which can be found in the src folder of this repository.
 ### Food Insecurity, Houselessness, and Unemployment Rates, by Year
 The charts below aim to visualize and compare the trends between these three scaled features over time:
+
 ![img](images/line_FI_House_Year.png)
 
 The lineplots above indicate there is a visible correlation between FI rate (target variable,) unemployment, and houseless rates. This is important to keep in mind, moving into modeling and inspecting feature importance.
 
 ### Food Insecurity in Different Communities, by Year
 The following lineplots aim to look at how average food insecurity rates differ across different racial communities over time:
+
 ![img](images/line_FI_race.png)
 
 The above lineplots indicate that average FI rates are highest in Black communities, followed by Indigenous and LatinX. While the general trend is downwards, some communities encounter anomalous movement, such as predominantly LatinX communities, which face an upward spike in FI Rates moving into 2018. It is important to note that these rates are not directly tied to racial groups, but rather counties with different predominant racial demographics.
 
 ### Average Unemployment Rates in Different Communities, by Year
 The below cell performs the same process as above, this time looking at average Unemployment rates in different racial communities, by year.
+
 ![img](images/line_unemp_race.png)
+
 The above linecharts indicate that predominantly Black and Indigenous communities face higher average rates of unemployment, followed by LatinX communities. The general trend of average unemployment rate is downwards over time.
 
 
@@ -71,15 +111,17 @@ The purpose of exploring this question is to gain a better understanding of the 
 The following cells generate chroropleth maps, which are heatmaps that visualize a particular feature across a geographic area. The maps are generated using a function called [`choropleth()`](src/functions.py) which takes a dataframe, feature, year, color palette, and title, and generates a choropleth map.
 
 ### Unemployment Rate, by County, 2019 and 2020
+
 ![img](images/2019_chor_Unemployment.png)
 ![img](images/2020_chor_Unemployment.png)
+
 Unemployment rates were at a record low in 2019 before the pandemic started, and shot up significantly in 2020, as can be seen by the maps above, which show a large increase in unemployment rates across the country, and especially on the coasts. 
 
 ### PoC Population Percentage by County, 2010 and 2018
 These maps aim to visualize which areas of the country whose populations are predominantly people of color.
 
-![img](images/2010_chor_%poc.png)
-![img](images/2018_chor_%poc.png)
+![img](images/2010_chor_poc.png)
+![img](images/2018_chor_poc.png)
 
 The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2018.
 
@@ -88,6 +130,7 @@ The following maps visualize FI Rates by county in 2009 and 2018.
 
 ![img](images/2009_chor_FI.png)
 ![img](images/2018_chor_FI.png)
+
 The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that national averages for FI rates have gone down over time, yet these maps indicate that in some communities, this problem has actually been exacerbated over time.<br>
 More notably, when compared to the maps above, it should be noted that areas most effected by food insecurity very closely map to areas that are predominantly non-white.
 
@@ -96,37 +139,48 @@ The purpose of this final EDA question is to determine how the other features in
 
 ### FI Distribution, by Rent Prices
 The below histograms show the distribution of FI rates in areas with 1-br apartment rent prices above $2000, vs areas with rent prices below $1000.
+
 ![img](images/hist_fi_rent.png)
+
 The above histograms indicate a visually significant difference between the two. Areas with lower rent prices have generally higher FI Rates, while areas with higher rent prices have lower FI Rates. This makes sense, given that "wealthier" areas likely less from food insecurity.
 
 ### FI Rate Distributions, by Unemployment Rate
 The following histograms plot FI rate distribution, by areas with unemployment rates above %15, vs areas with unemployment rates below %5.
+
 ![img](images/hist_fi_unemp.png)
+
 The above historams show a visually significant difference in FI rates between areas based on unemployment rates. Areas with high unemployment rates have higher average FI Rates, while areas with low unemployment rates have lower average FI Rates. This is pretty intuitive, given that being unemployed is a likely cause of being unable to afford food.
 
 ### FI Distributions, by Houseless Rates
 The below histograms plot food insecurity distributions of areas with a houseless rate above %1, and areas with a houseless rate below %0.01.
+
 ![img](images/hist_fi_houseless.png)
+
 The above histograms indicate a visually significant difference between the two distributions. Areas with higher houselessness rates have a higher average FI Rate than areas with low houselessness. This makes sense, given that being houseless possibly indicates a lack of money, which lacks to an inability to buy enough food.
 
 ### FI Rate Distribution, by Race
 The following histograms plot food insecurity rate distributions for areas of predominantly different races.
+
 ![img](images/hist_fi_unemp.png)
+
 The above histograms indicate a visually significant different in FI rates for different racial communities. Areas that are predominantly Black are shown to have a much higher average FI rate than predominantly white or LatinX communities. This is important to keep in mind, when considering feature importance and factors that are significant indicators for food insecurity.
 
 ## EDA Summary
-The purpose of this exploratory data analysis was to explore the above questions through the lense of **time** and **geography**.
+The purpose of this exploratory data analysis was to explore the above questions through the lens of **time** and **geography**.
 
 From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are geographically impacted most, and how these different features have changed over time. Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the visualizations above highlight how these factors have actually been exacerbated in certain geographic areas over time.<br>
 
 The findings of this data exploration are meaningful when determining which communities and geographic areas are most at-risk for high food insecurity rates, and should be used both in terms of allocating resources to these communities, as well as taking proactive measures to address the root cause of these issues that disproportionately affect some more than others.
 
-## Modeling Process
+# Modeling Process
+## Feature Engineering
+Before beginning modeling, several new features are derived from the original dataset features:
 
-## Model Evaluation
+
+# Model Evaluation
 
 
-## Conclusion & Next Steps
+# Conclusion & Next Steps
 
 
 ## For More Information
@@ -147,7 +201,7 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── EDA.ipynb				<- Data anlysis & visualization notebook
 │   ├── feature_engineering.ipynb
 │   ├── modeling.ipynb			<- Feature selection, modeling, and evaluation
-├── datasets			<- Directory of all datasets used 
+├── datasets					<- Directory of all datasets used 
 │   ├── businesses
 |	├── demographics
 |	├── feeding_america
@@ -157,15 +211,13 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 |	├── rent_prices
 |	├── unemployment
 |	├── shapefile
-├── images				<- All images produced from EDA
-├── pickled				<- Cleaned datasets and final model
+├── images						<- All images produced from EDA
+├── pickled						<- Cleaned datasets and final model
 │   ├── partially_cleaned_data.pickle
 │   ├── fully_cleaned_data.pickle
 └   ├── feature_engineered_data.pickle
  modeling_process.ipynb
 ```
-
-
 
 
 
