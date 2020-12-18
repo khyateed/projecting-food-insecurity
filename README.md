@@ -187,8 +187,8 @@ Interactions help to account for coexisting features - for example, someone of i
 
 ### Log Transformations
 Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.
-![img](images/scatter_rent.png)
-![img](images/scatter_log_rent.png)
+![img](images/scatter_Rent.png)
+![img](images/scatter_log_Rent.png)
 
 The above images show scatter plots of Rent price vs. FI Rate, and Log of Rent price vs. FI Rate. The log transofrmation penalizes the ouliers present within the rent data, allowing the shape of the data to be better interpreted.
 
