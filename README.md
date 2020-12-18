@@ -186,7 +186,8 @@ An interaction feature is created for each combination of continuous features, a
 Interactions help to account for coexisting features - for example, someone of identity A ***and*** identity B may have a much greater chance of being food insecure than someone of only identity A *or* identity B
 
 ### Log Transformations
-Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.
+Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.<br>
+
 ![img](images/scatter_Rent.png)
 ![img](images/scatter_log_Rent.png)
 
