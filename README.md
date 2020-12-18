@@ -4,14 +4,14 @@
 ### Flatiron School Data Science Capstone Project<br>By Khyatee Desai
 
 # Overview
-Food insecurity (FI) is defined as the inability to consistently and reliably obtain enough food, due to a lack of resources. Food insecurity rates are one of the primary metrics used in determining how resources get distributed to communities through government assistance programs such as the Supplemental Nutrition Assistance Program (SNAP,) through non-profits organizations such as Feeding America, and through mutual-aid projects. <br>
+Food insecurity (FI) is defined as the inability to consistently and reliably obtain enough food, due to a lack of resources. Food insecurity rates are one of the primary metrics used in determining how resources get distributed to communities through government assistance programs such as the Supplemental Nutrition Assistance Program (SNAP,) through non-profits organizations such as Feeding America, and through mutual-aid projects. <br><br>
 These organizations tend to prioritize resource allocation in the form of food, money, and financial relief to communities that demonstrate the greatest need in a *quantifiable* way. The goal of this project is to predict future food insecurity rates at the county level to aid in resource allocation and to better direct preventative measures to those areas *before* the issue gets worse.
 
 # Business Problem
 
-Food insecurity, is not a phenomena that can be easily predicted, or even measure in real-time for two reasons: first, it is dependent upon a number of interwoven factors that can grow and change in unpredictable ways. Second, FI rate is a measure that is often determined retroactively, based on how food-assistance programs end up being utilized, and how survey respondents end up reporting their past food-related needs.<br>
-Currently, food insecurity rates for the past year are determined through the Current Population Survey (CPS,) which is a nationally representative survey conducted by the Census Bureau for the Bureau of Labor Statistics. In December of each year, 50,000 households respond to this survey, answering questions related to income, food spending, and the use of government and community food assistance programs, all of which are factored together to produce an annual food insecurity rate estimation.<br>
-While this annual survey provides incredibly valuable insight into the past needs of people at the community level, it does not inherently have the predictive capability to determine which communities will face the greatest impacts from food insecurity in the future, *especially in the face of a worldwide pandemic that drastically impacts employment status, businesses, houselessness, and mobility.*<br>
+Food insecurity, is not a phenomena that can be easily predicted, or even measure in real-time for two reasons: first, it is dependent upon a number of interwoven factors that can grow and change in unpredictable ways. Second, FI rate is a measure that is often determined retroactively, based on how food-assistance programs end up being utilized, and how survey respondents end up reporting their past food-related needs.<br><br>
+Currently, food insecurity rates for the past year are determined through the Current Population Survey (CPS,) which is a nationally representative survey conducted by the Census Bureau for the Bureau of Labor Statistics. In December of each year, 50,000 households respond to this survey, answering questions related to income, food spending, and the use of government and community food assistance programs, all of which are factored together to produce an annual food insecurity rate estimation.<br><br>
+While this annual survey provides incredibly valuable insight into the past needs of people at the community level, it does not inherently have the predictive capability to determine which communities will face the greatest impacts from food insecurity in the future, *especially in the face of a worldwide pandemic that drastically impacts employment status, businesses, houselessness, and mobility.*<br><br>
 Therefore, the goal of this capstone project is to aid in a proactive solution to food insecurity, by using regression models to project future FI rates using closely linked indicators such as houselessness, food cost, race, and employment status.
 
 # Data
@@ -20,7 +20,7 @@ The datasets used for the MVP model come from six different sources and are each
 | DATASET        |   SOURCE        | DESCRIPTION                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |-------------|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Food insecurity data    | Feeding America [Map the Meal Gap Study](https://www.feedingamerica.org/research/map-the-meal-gap/how-we-got-the-map-data)     | This dataset contains data on food insecurity rates in the US by county, from 2009-2018.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| Unemployment Data              | [Bureau of Labor Statistics](https://www.bls.gov/lau/#tables)        | This dataset contains yearly data on the Labor Force of each US county, for the years 2009-2019. The files include data on total workforce, and unemployment rates.                                                                                                                                                                                                                                                                                                                                                                                        |
+| Unemployment Data              | [Bureau of Labor Statistics](https://www.bls.gov/lau/#tables)        | This dataset contains yearly data on the Labor Force of each US county, for the years 2009-2020. The files include data on total workforce, and unemployment rates.                                                                                                                                                                                                                                                                                                                                                                                        |
 | Demographic Data             | United States Census Bureau [County Population Estimates](https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html)        | This dataset contains columns on demographic information such as gender, race, and age, for each US county, for years 2010-2019.                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Houselessness Data   | US Dept. Housing & Urban Development (HUD) [Point in Time Estimates](https://www.hud.gov/2019-point-in-time-estimates-of-homelessness-in-US)      | This dataset contains data on houselessness rates in the US by Continuum of Care (CoC,) for the years 2009-2019.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Rent Prices     | [Zillow Observed Rent Index](https://www.zillow.com/research/data/)      | This dataset contains _monthly_ data from Zillow.com on 1-bedroom rent prices _by zipcode_, for the years 2014-2020. The data is produced using the **Zillow Observed Rent Index** (ZORI,) which is a smoothed measure of the typical observed market rate rent across a given region.                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -28,20 +28,20 @@ The datasets used for the MVP model come from six different sources and are each
                                
 # Preprocessing
 The datasets must undergo several important pre-processing steps before EDA and modeling can occur:
--  import each year's dataset and standardize any differences
-- preliminary cleaning and isolating desired features
-- map columns to coded values using data dictionaries
-- derive GEOID's (also called FIPS codes) for each observation at the County level
-- impute missing values 
-- adjust datatypes
-- reformat each dataframe in a standardized pattern
-- concatenate all 6 dataframes into a main dataset
+-  import each dataset, which contains a folder of CSV files for each year, and standardize any differences between the years
+- preliminary cleaning, such as renaming columns for interpretability and dropping features not needed for EDA or modeling, such as unique ID numbers or metrics that are irrelevant to this project.
+- map coded columns to their corresponding columns using data dictionaries
+- reformat GEOID's (also called FIPS codes) for each observation at the County level - FIPS code will be used as the primary/foreign key for each dataset to be joined together.
+- impute missing values in the Feeding America dataset for years 2011-2013 by using averaged change between 2010 and 2014 data.
+- replace special characters such as "--" with null
+- add a "Year" column to each yearly dataset, and then vertically concatenate all the yearly datasets together
+- horizontally concatenate all 6 dataframes into a main dataset for all years and all features
 
 
 
 
 ### Data Dictionary
-This table describes each of the main features of the cleaned dataset used in EDA and modeling:
+This table describes each of the main features of the final cleaned dataset  (before feature engineering) which is used for EDA and modeling:
 | FEATURE  |      DESCRIPTION       |   DATA TYPE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 |----------|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | FIPS | County level identification code (also referred to as GEOID|str|
@@ -170,20 +170,19 @@ The above histograms indicate a visually significant different in FI rates for d
 
 ## EDA Summary
 This exploratory data analysis was to explore the above questions through the lens of **time** and **geography**.
-From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are geographically impacted most, and how these different features have changed over time. Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the visualizations above highlight how these factors have actually been exacerbated in certain geographic areas over time.<br>
-
+From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are geographically impacted most, and how these different features have changed over time. Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the visualizations above highlight how these factors have actually been exacerbated in certain geographic areas over time.<br><br>
 The findings of this data exploration are meaningful when determining which communities and geographic areas are most at-risk for high food insecurity rates, and should be used both in terms of allocating resources to these communities, as well as taking proactive measures to address the root cause of these issues that disproportionately affect some more than others.
 
 # Modeling Process
 ## Feature Engineering
 Before beginning modeling, several new features are derived from the original dataset features in the [feature_engineering.ipynb](notebooks/feature_engineering.ipynb) notebook. These engineered features are saved using Pickle, and imported into the modeling notebook later on. 
 ### Demographics Percentage Breakdowns
-Demographic percentages make it possible to compare the demographic distribution of different counties, while accounting for population density differences.
+Demographic percentages make it possible to compare the demographic distribution of different counties, while accounting for population density differences.<br>
 Ex. `df['Percent_male'] = df['TOT_MALE']/df['TOT_POP']`
 
 ### Interaction Features
-An interaction feature is created for each combination of continuous features, and the "best" performing features are added to the main dataframe, by running them in a simple OLS model and comparing R2 values. Interaction Features are derived using the following calculation:
-`df[feature1+'_X_'+feature2] = df[feature1] * df[feature2]`
+An interaction feature is created for each combination of continuous features, and the "best" performing features are added to the main dataframe, by running them in a simple OLS model and comparing R2 values. Interaction Features are derived using the following calculation:<br>
+`df[feature1+'_X_'+feature2] = df[feature1] * df[feature2]`<br>
 Interactions help to account for coexisting features - for example, someone of identity A ***and*** identity B may have a much greater chance of being food insecure than someone of only identity A *or* identity B
 
 ### Log Transformations
@@ -193,6 +192,68 @@ Log features are created by taking the natural log of a feature, and adding this
 Dummy variables are created for the categorical variables High and Low threshold, by using the Pandas `get_dummies()` function to turn them into 1's and 0's.
 
 ## Modeling and Feature Selection
+The modeling process uses final cleaned data with engineered features, produced and pickled from [feature_engineering.ipynb](notebooks/feature_engineering.ipynb). Each model produced for the MVP is a simple linear regression, using different features determined through a variety of feature selection techniques.<br>Note: The `rent` column is dropped for all models, because rent price data was only available for major metropolitan areas, and therefore retaining the column would require dropping a large majority of rows in order for the models to run. This decision should not significantly impact the performance of the models, given that the relationship between rent and the FI rates is not very strong, as can be seen through the EDA process.
+
+### Model 1: All Features
+The first model uses all features in the cleaned dataset, as well as all engineered features.
+|            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----|-----|-------|
+| Train | 0.652 | 0.0258|
+| Test | 0.638 | 0.0260 |
+
+Model 1 had a cross validation R2 score of  **0.587**, with 5 folds. 
+
+### Model 2: Remove Outliers
+The [EDA notebook](notebooks/EDA.ipynb) includes a section on inspecting which features have the largest outliers, using box and whisker plots. The following cell focuses on the features with highest outliers: 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'TOT_BLACK', 'TOT_ASIAN','TOT_WHITE', 'TOT_LATINX','Total_workforce', and 'Employed'
+
+![img](images/box_outliers.png)
+
+For model 2, each feature with visibly high outliers is iterated on, and if the feature has observations _greater_ than +/- 2 standard deviations of the mean, it reduces outliers to +/- 2 standard deviations from the mean of that feature.<br>
+The model is then re-run using the same process as model 1, now on data with reduced outliers:
+
+
+|            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----|-----|-------|
+| Train | 0.760 | 0.0214|
+| Test | 0.757 | 0.0215 |
+
+Model 2 had slightly better R2 scores, but lower RMSE, and more importantly, a lower cross validation R2 score of  **0.503**, with 5 folds. 
+
+
+### Model 3: Removed Multicollinear Features
+Multicollinearity can create noise within the data. A heatmap is produced from correlation matrix in the [EDA notebook](notebooks/EDA.ipynb), which highlights that houseless rate, sheltered/unsheltered rates, and all of the race-related features are highly correlated with one another.
+![img](images/heat_multicoll.png)
+
+For model 3, Variance inflation factor (VIF) is used to remove highly correlated features. VIF helps quantifies the severity of multicollinearity in a regression model, by comparing variance of the model with different terms. High VIF scores indicate severe multicollinearity, so model 3 uses only features with VIF scores below 10. 
+
+|            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----|-----|-------|
+| Train | 0.450 | 0.032|
+| Test | 0.473 | 0.0318 |
+
+Model 3 had a cross validation R2 score of  **0.385**, and the worst scores for both R2 and RMSE.
+
+### Model 4: K-Best Features
+Model 4 uses `SelectKBest()` to determine the best k featues to use in a model. The cell below loops through a number of k values to determine the optimal one. The best k value is determined to be 93, so model 4 is run with those features. 
+
+|            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----|-----|-------|
+| Train | 0.791 | 0.0199|
+| Test | 0.791 | 0.0200 |
+
+Model 4 performs significantly better than others, with an average **R-squared value of .791**, an **RMSE of .0199**, and an average **cross validation score of 0.743.**
+
+### Model 5: Recursive Feature Elimination
+Recursive feature elimination is used to iteratively remove features and rerun the model, in order to find an optimal set of features to use.
+
+|            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|-----|-----|-------|
+| Train | 0.792 | 0.0199|
+| Test | 0.792 | 0.0200 |
+
+Model 5 performs slightly better than the Select K Best model, with an average **R-squared value of .792**, an **RMSE of .0198**, and an average **cross validation score of 0.749**.
+
+
 # Model Evaluation
 
 
@@ -227,8 +288,8 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 |	├── rent_prices
 |	├── unemployment
 |	├── shapefile
-├── images		<- All images produced from EDA
-├── pickled		<- Cleaned datasets and final model
+├── images				<- All images produced from EDA
+├── pickled				<- Cleaned datasets and final model
 │   ├── partially_cleaned_data.pickle
 │   ├── fully_cleaned_data.pickle
 └   ├── feature_engineered_data.pickle
