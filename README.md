@@ -263,7 +263,7 @@ Model 5 performs slightly better than the Select K Best model, with an average *
 Model 5, which used Recursive Feature Elimination was found to be the best MVP model. Below, we inspect model features and coefficients, and use the model to make predicitions:
 ## Model Coefficients
 View the ten highest coefficients alongside their corresponding features : <br> 
-`[(25148.43406913098, 'Unsheltered_rate'),`
+`[(25148.43406913098, 'Unsheltered_rate'),`<br>
  `(25128.704386069712, 'Houseless_rate_X_Sheltered_rate'),`<br>
  `(25121.82280037445, 'Houseless_rate_X_Percent_male'),`<br>
  `(25102.09215732087, 'Sheltered_rate'),`<br>
