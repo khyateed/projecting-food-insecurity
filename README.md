@@ -187,8 +187,8 @@ Interactions help to account for coexisting features - for example, someone of i
 
 ### Log Transformations
 Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.
-![img](images/scatter_rent)
-![img](images/scatter_log_rent)
+![img](images/scatter_rent.png)
+![img](images/scatter_log_rent.png)
 
 The above images show scatter plots of Rent price vs. FI Rate, and Log of Rent price vs. FI Rate. The log transofrmation penalizes the ouliers present within the rent data, allowing the shape of the data to be better interpreted.
 
@@ -261,16 +261,17 @@ Model 5 performs slightly better than the Select K Best model, with an average *
 # Model Evaluation
 Model 5, which used Recursive Feature Elimination was found to be the best MVP model. Below, we inspect model features and coefficients, and use the model to make predicitions:
 ## Model Coefficients
-View the ten highest coefficients alongside their corresponding features : <br> `[(25148.43406913098, 'Unsheltered_rate'),<br>
- (25128.704386069712, 'Houseless_rate_X_Sheltered_rate'),<br>
- (25121.82280037445, 'Houseless_rate_X_Percent_male'),<br>
- (25102.09215732087, 'Sheltered_rate'),<br>
- (12589.751692018015, 'Percent_Black_X_Percent_working'),<br>
- (12563.140386645082, 'Sheltered_rate_X_Percent_male'),<br>
- (12558.682413724084, 'Unsheltered_rate_X_Percent_male'),<br>
- (12538.952694053738, 'Houseless_rate_X_Percent_female'),<br>
- (118.73999449300752, 'Houseless_rate_X_Percent_working'),<br>
- (84.2136249355529, 'Unsheltered_rate_X_Percent_asian')]`
+View the ten highest coefficients alongside their corresponding features : <br> 
+`[(25148.43406913098, 'Unsheltered_rate'),`
+ `(25128.704386069712, 'Houseless_rate_X_Sheltered_rate'),`<br>
+ `(25121.82280037445, 'Houseless_rate_X_Percent_male'),`<br>
+ `(25102.09215732087, 'Sheltered_rate'),`<br>
+ `(12589.751692018015, 'Percent_Black_X_Percent_working'),`<br>
+ `(12563.140386645082, 'Sheltered_rate_X_Percent_male'),`<br>
+ `(12558.682413724084, 'Unsheltered_rate_X_Percent_male'),`<br>
+ `(12538.952694053738, 'Houseless_rate_X_Percent_female'),`<br>
+ `(118.73999449300752, 'Houseless_rate_X_Percent_working'),`<br>
+ `(84.2136249355529, 'Unsheltered_rate_X_Percent_asian')]`
 
 From the output, we see that Houseless rates intersected with race are the highest predictors for food insecurity, which is not surprising after exploring the relationships between race, houselessness, and FI rates during the EDA process.
 
