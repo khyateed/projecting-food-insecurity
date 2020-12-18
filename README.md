@@ -75,7 +75,7 @@ This table describes each of the main features of the final cleaned dataset  (be
 |Unemployed| Total number of people within a county who are unemployed | float
 |Unemployment_rate |Percent of the total workforce within a county that is unemployed|float|                                                                                                         |
 <br>
-For a detailed walkthrough of the cleaning process used to derive this cleaned dataset, please view [cleaning_pt1.ipynb](notebooks/cleaning_pt1.ipynb) and [cleaning_pt2.ipynb](notebooks/cleaning_pt2.ipynb).
+For a detailed walkthrough of the cleaning process used to derive this cleaned dataset, please view [cleaning_pt1](notebooks/cleaning_pt1.ipynb) and [cleaning_pt2](notebooks/cleaning_pt2.ipynb).
 
 # Exploratory Data Analysis
 This project focuses on projecting future FI rates, at the county level. This means that both **time** and **geography** are important components of understanding the data. The [EDA notebook](notebooks/EDA.ipynb) addresses 3 questions to help gain a better understanding of food insecurity, and how it relates to time and geography:<br>
