@@ -255,10 +255,43 @@ Model 5 performs slightly better than the Select K Best model, with an average *
 
 
 # Model Evaluation
+Model 5, which used Recursive Feature Elimination was found to be the best MVP model. Below, we inspect model features and coefficients, and use the model to make predicitions:
+## Model Coefficients
+View the ten highest coefficients alongside their corresponding features : `[(25148.43406913098, 'Unsheltered_rate'),
+ (25128.704386069712, 'Houseless_rate_X_Sheltered_rate'),
+ (25121.82280037445, 'Houseless_rate_X_Percent_male'),
+ (25102.09215732087, 'Sheltered_rate'),
+ (12589.751692018015, 'Percent_Black_X_Percent_working'),
+ (12563.140386645082, 'Sheltered_rate_X_Percent_male'),
+ (12558.682413724084, 'Unsheltered_rate_X_Percent_male'),
+ (12538.952694053738, 'Houseless_rate_X_Percent_female'),
+ (118.73999449300752, 'Houseless_rate_X_Percent_working'),
+ (84.2136249355529, 'Unsheltered_rate_X_Percent_asian')]`
 
+From the output, we see that Houseless rates intersected with race are the highest predictors for food insecurity, which is not surprising after exploring the relationships between race, houselessness, and FI rates during the EDA process.
+
+## Visualize Predictions
+Model 5 is used to make predictions on 2018 data, and then presented alongside actual 2018 FI rates:
+
+![img](images/2018preds_fi.png)
+![img](images/2018_fi.png)
+
+The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. White areas are counties which contained missing values, due to a lack of data specific to a feature for the year 2018.
 
 # Conclusion & Next Steps
+The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score. The most important features used in this model were shown to be Unsheltered_rate_X_Percent_asian, Sheltered_rate_X_Percent_white, Sheltered_rate_X_Percent_Black, Houseless_rate_X_Percent_asian, and Unsheltered_rate_X_Percent_male, based on model coefficients. This indicates that both houselessness and race play a very critical role in determining the likelihood of food insecurity, but especially so when they are combined (ie. someone who is both Black and houseless.)<br>  
 
+The choropleth maps on 2018 FI Rate predictions indicate that the model was able to capture the general trend of food insecurity, particularly in places that are hardest hit.
+
+
+### Next Steps
+There is a lot of room to improve the model's ability to explain even more variance in the data, potentially by adding more features such as household income, food assistance programs, age, disability, eviction data, and transportation access.<br>
+The next iteration of this project aims to accomplish the following:
+- add more features
+- utilize statistical testing during EDA
+- employ different types of regression models
+- create an interactive map to visualize features and trends
+- project FI rates on unlabeled data from 2020
 
 ## For More Information
 
