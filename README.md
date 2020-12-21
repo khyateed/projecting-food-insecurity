@@ -38,10 +38,10 @@ There are 54 datasets used to produce features for the MVP model, each of which 
 - add a "Year" column to each yearly dataset, and then vertically concatenate all the yearly datasets together
 - horizontally concatenate all 6 dataframes into a main dataset for all years and all features
 
-The following images depict the 2009 Businesses dataset before and after data cleaning.<br>
-Before cleaning:
+The following images depict the 2009 Businesses dataset before and after data cleaning.<br><br>
+**Before cleaning:**
 ![img](images/before_cleaning.png)
-After cleaning:<br>
+**After cleaning:**<br><br>
 ![img](images/after_cleaning.png)
 
 
