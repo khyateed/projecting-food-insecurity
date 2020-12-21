@@ -38,7 +38,7 @@ There are 54 datasets used to produce features for the MVP model, each of which 
 - add a "Year" column to each yearly dataset, and then vertically concatenate all the yearly datasets together
 - horizontally concatenate all 6 dataframes into a main dataset for all years and all features
 
-The following images depict the 2009 Businesses dataset before and after data cleaning.<br><br>
+**The following images depict the 2009 Businesses dataset before and after data cleaning.**<br><br>
 **Before cleaning:**
 ![img](images/before_cleaning.png)<br><br>
 **After cleaning:**
@@ -84,12 +84,12 @@ This table describes each of the main features of the final cleaned dataset  (be
 For a detailed walkthrough of the cleaning process used to derive this cleaned dataset, please view data cleaning notebooks [part one](notebooks/cleaning_pt1.ipynb) and [part two](notebooks/cleaning_pt2.ipynb).
 
 # Exploratory Data Analysis
-This project focuses on projecting future FI rates, at the county level. This means that both **time** and **geography** are important components of understanding the data. The [EDA notebook](notebooks/EDA.ipynb) addresses 3 questions to help gain a better understanding of food insecurity, and how it relates to time and geography:<br>
+This project focuses on projecting future FI rates, at the county level. This means that both **time** and **geography** are important components of understanding the data. The [EDA notebook](notebooks/EDA.ipynb) addresses 3 questions to help gain a better understanding of food insecurity, and how it relates to time, geography, and its closely linked indicators.<br>
 
 ## Question 1. How have metrics such as unemployment, houselessness, and food insecurity rates changed over time?
-The first EDA question explores how different features from the original dataset have changed over time. Because this project ultimately aims to project food insecurity rates for 2020, it is important to get an understanding of how features change over time, and whether they follow any discernible trends.<br>
+The first EDA question explores how different features from the original dataset have changed over time. Because this project ultimately aims to project food insecurity rates for 2020, it is important to get an understanding of how features change *over time*, and whether they follow any discernible trends.<br>
 
-Each feature group is scaled to the same magnitude, and visualized using lineplots or/and barcharts. The productions of these charts with multiple variables is accomplished using two functions: [`lineplot()`](src/functions.py) and [`barchart()`](src/functions.py), both of which can be found in the src folder of this repository.
+Each feature group is scaled to the same magnitude, and visualized using lineplots or/and barcharts. The construction of these multi-variable charts is accomplished using two functions: [`lineplot()`](src/functions.py) and [`barchart()`](src/functions.py), both of which can be found in the src folder of this repository.
 ### Food Insecurity, Houselessness, and Unemployment Rates, by Year
 The charts below aim to visualize and compare the trends between these three scaled features over time:
 
@@ -140,11 +140,11 @@ The following maps visualize FI Rates by county in 2009 and 2018.
 ![img](images/2009_chor_FI.png)
 ![img](images/2018_chor_FI.png)
 
-The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that national averages for FI rates have gone down over time, yet these maps indicate that in some communities, this problem has actually been exacerbated over time.<br>
-When compared to the maps above which visualize communities of color, it is easy to see that the counties which are most severely effected by food insecurity very closely parallel the areas of the country that are predominantly non-white.
+The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that **while national averages for FI rates have gone down over time, these maps indicate that in some communities, this problem has actually been exacerbated over time.<br>
+When compared to the maps above which visualize communities of color, it is easy to see that the counties which are most severely effected by food insecurity very closely parallel the areas of the country that are predominantly non-white.**
 
 ## 3. Is there a relationship between food insecurity rate and other factors such as rent prices, unemployment, houselessness, and race?
-The purpose of this final EDA question is to determine how the other features in the dataset, such as Food Retail presence and houselessness, relate to food insecurity rates. These observations will be important to keep in mind moving into the modeling process and looking at coefficients/feature importances.
+The purpose of this final EDA question is to determine how the other features in the dataset, such as average rent prices and houselessness rates, directly relate to food insecurity rates. These observations will be important to keep in mind moving into the modeling process and looking at coefficients/feature importances.
 
 ### FI Distribution, by Rent Prices
 The below histograms show the distribution of FI rates in areas with 1-br apartment rent prices above $2000, vs areas with rent prices below $1000.
@@ -172,12 +172,13 @@ The following histograms plot food insecurity rate distributions for areas of pr
 
 ![img](images/hist_fi_race.png)
 
-The above histograms indicate a visually significant different in FI rates for different racial communities. Areas that are predominantly Black are shown to have a much higher average FI rate than predominantly white or LatinX communities. This is important to keep in mind, when considering feature importance and factors that are significant indicators for food insecurity.
+The above histograms indicate a visually significant different in FI rates for different racial communities. Areas that are predominantly Black are shown to have a much higher average FI rate of 0.29, versus predominantly white or LatinX communities with averages around 0.14. This is important to keep in mind, when considering feature importance and factors that are significant indicators for food insecurity.
 
-## EDA Summary
-This exploratory data analysis was to explore the above questions through the lens of **time** and **geography**.
-From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are geographically impacted most, and how these different features have changed over time. Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the visualizations above highlight how these factors have actually been exacerbated in certain geographic areas over time.<br><br>
-The findings of this data exploration are meaningful when determining which communities and geographic areas are most at-risk for high food insecurity rates, and should be used both in terms of allocating resources to these communities, as well as taking proactive measures to address the root cause of these issues that disproportionately affect some more than others.
+## Data Analysis Summary
+This data analysis explores the above questions through the lens of time and geography.
+From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are **geographically** impacted most, as well as how these different features have changed **over time**. 
+<br>Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the above choropleth maps indicate that these factors have actually been exacerbated in certain geographic areas over time.<br><br>
+**The findings of this data exploration are meaningful when determining which communities and geographic areas are most at-risk for high food insecurity rates, and should be used both in terms of allocating resources to these communities, as well as taking proactive measures to address the root cause of these issues that disproportionately affect certain communities over others.**
 
 # Modeling Process
 ## Feature Engineering
@@ -189,7 +190,7 @@ Ex. `df['Percent_male'] = df['TOT_MALE']/df['TOT_POP']`
 ### Interaction Features
 An interaction feature is created for each combination of continuous features, and the "best" performing features are added to the main dataframe, by running them in a simple OLS model and comparing R2 values. Interaction Features are derived using the following calculation:<br>
 `df[feature1+'_X_'+feature2] = df[feature1] * df[feature2]`<br>
-Interactions help to account for coexisting features - for example, someone of identity A ***and*** identity B may have a much greater chance of being food insecure than someone of only identity A *or* identity B
+Interactions help to account for coexisting features - for example, someone of identity A ***and*** identity B may have a much greater chance of being food insecure than someone of only identity A ***or*** identity B
 
 ### Log Transformations
 Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.<br>
@@ -197,13 +198,14 @@ Log features are created by taking the natural log of a feature, and adding this
 ![img](images/scatter_Rent.png)
 ![img](images/scatter_log_Rent.png)
 
-The above images show scatter plots of Rent price vs. FI Rate, and Log of Rent price vs. FI Rate. The log transformation penalizes the outliers present within the rent data, allowing the shape of the data to be better interpreted.
+The above images show scatter plots of Rent price vs. FI Rate, and **Log** Rent price vs. FI Rate. The log transformation penalizes the outliers present within the rent data, allowing the shape of the data to be better interpreted.
 
 ### Dummy Variables
 Dummy variables are created for the categorical variables High and Low threshold, by using the Pandas `get_dummies()` function to turn them into 1's and 0's.
 
-## Modeling and Feature Selection
-The modeling process uses final cleaned data with engineered features, produced and pickled from [feature_engineering.ipynb](notebooks/feature_engineering.ipynb). Each model produced for the MVP is a simple linear regression, using different features determined through a variety of feature selection techniques.<br>Note: The `rent` column is dropped for all models, because rent price data was only available for major metropolitan areas, and therefore retaining the column would require dropping a large majority of rows in order for the models to run. This decision should not significantly impact the performance of the models, given that the relationship between rent and the FI rates is not very strong, as was determined through the EDA process.
+## Feature Selection and Modeling 
+The modeling process uses final cleaned data with engineered features, produced and pickled from [feature_engineering.ipynb](notebooks/feature_engineering.ipynb). Each model produced for the MVP is a simple linear regression, using different features determined through a variety of feature selection techniques.<br>
+Note: The `rent` column is dropped for all models, because rent price data was only available for major metropolitan areas, and therefore retaining the column would require dropping a large majority of rows in order for the models to run. This decision should not significantly impact the performance of the models, given that the relationship between rent and the FI rates is not very strong, as was determined through the EDA process.
 
 ### Model 1: All Features
 The first model uses all features in the cleaned dataset, as well as all engineered features.
@@ -231,11 +233,12 @@ The model is then re-run using the same process as model 1, now on data with red
 Model 2 had slightly better R2 scores, but lower RMSE, and more importantly, a lower cross validation R2 score of  **0.503**, with 5 folds. 
 
 
-### Model 3: Removed Multicollinear Features
-Multicollinearity can create noise within the data. A heatmap is produced from correlation matrix in the [EDA notebook](notebooks/EDA.ipynb), which highlights that houseless rate, sheltered/unsheltered rates, and all of the race-related features are highly correlated with one another.
+### Model 3: Remove Multicollinear Features
+Multicollinearity occurs when features in the dataset are correlated to one another, rather than only to the target variable. Multicollinearity can create noise within the data, and is therefore important to address during the feature selection process. 
+A heatmap is produced from correlation matrix in the [EDA notebook](notebooks/EDA.ipynb), which highlights that houseless rate, sheltered/unsheltered rates, and all of the race-related features are highly correlated with one another.
 ![img](images/heat_multicoll.png)
 
-For model 3, Variance inflation factor (VIF) is used to remove highly correlated features. VIF helps quantifies the severity of multicollinearity in a regression model, by comparing variance of the model with different terms. High VIF scores indicate severe multicollinearity, so model 3 uses only features with VIF scores below 10. 
+For model 3, Variance inflation factor (VIF) is used to remove highly correlated features. VIF helps quantify the severity of multicollinearity in a dataset by comparing variance of the model using different terms. High VIF scores indicate severe multicollinearity, so model 3 uses only features with VIF scores below 10. 
 
 |            | R2     |    RMSE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 |-----|-----|-------|
@@ -280,7 +283,7 @@ View the ten highest coefficients alongside their corresponding features : <br>
  `(118.73999449300752, 'Houseless_rate_X_Percent_working'),`<br>
  `(84.2136249355529, 'Unsheltered_rate_X_Percent_asian')]`
 
-From the output, we see that Houseless rates intersected with race are the highest predictors for food insecurity, which is not surprising after exploring the relationships between race, houselessness, and FI rates during the EDA process.
+From the output, we see that houseless rates intersected with race are the highest predictors for food insecurity, which is not surprising after exploring the relationships between race, houselessness, and FI rates during the EDA process.
 
 ## Visualize Predictions
 Model 5 is used to make predictions on 2018 data, and then presented alongside actual 2018 FI rates:
@@ -291,15 +294,16 @@ Model 5 is used to make predictions on 2018 data, and then presented alongside a
 The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. White areas are counties which contained missing values, due to a lack of data specific to a feature for the year 2018.
 
 # Conclusion & Next Steps
-The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score. The most important features used in this model were shown to be Unsheltered_rate_X_Percent_asian, Sheltered_rate_X_Percent_white, Sheltered_rate_X_Percent_Black, Houseless_rate_X_Percent_asian, and Unsheltered_rate_X_Percent_male, based on model coefficients. This indicates that both houselessness and race play a very critical role in determining the likelihood of food insecurity, but especially so when they are combined (ie. someone who is both Black and houseless.)<br>  
+The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score of 0.0198. The most important features used in this model were shown to be `Unsheltered_rate_X_Percent_asian`, `Sheltered_rate_X_Percent_white`, `Sheltered_rate_X_Percent_Black`, `Houseless_rate_X_Percent_asian`, and `Unsheltered_rate_X_Percent_male`, based on model coefficients. 
+This indicates that both houselessness and race play a very critical role in determining the likelihood of food insecurity, *but especially so when they are combined* (ie. someone who is both Black and houseless.)<br>  
 
 The choropleth maps on 2018 FI Rate predictions indicate that the model was able to capture the general trend of food insecurity, particularly in places that are hardest hit.
 
 
 ### Next Steps
-There is a lot of room to improve the model's ability to explain even more variance in the data, potentially by adding more features such as household income, food assistance programs, age, disability, eviction data, and transportation access.<br>
-The next iteration of this project aims to accomplish the following:
-- add more features
+There is a lot of room to improve the model's ability to explain even more variance in the data, potentially by adding more features such as household income, food assistance programs, age, disability, eviction data, and transportation access.<br><br>
+**The next iteration of this project aims to accomplish the following:**
+- include more features
 - utilize statistical testing during EDA
 - employ different types of regression models
 - create an interactive map to visualize features and trends
