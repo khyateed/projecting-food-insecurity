@@ -115,8 +115,7 @@ The above lineplots indicate that predominantly Black and Indigenous communities
 
 ## Question 2. How do unemployment, race, and food insecurity rates vary geographically?
 The purpose of exploring this question is to gain a better understanding of the geographic component of food insecurity and related features.
-
-### Choropleth Maps
+<br>
 This question was explored by producing several chroropleth maps, which are heatmaps that visualize a particular feature across a geographic area. The maps are generated using a function called [`choropleth()`](src/functions.py) which takes a dataframe, feature, year, color palette, and title, and generates a choropleth map.
 
 ### Unemployment Rate, by County, 2019 and 2020
@@ -182,16 +181,16 @@ From the analysis, we see close relationships between FI Rates, unemployment rat
 
 # Feature Engineering
 Before beginning modeling, several new features are derived from the original dataset features in the [feature_engineering.ipynb](notebooks/feature_engineering.ipynb) notebook. These engineered features are saved using Pickle, and imported into the modeling notebook later on. 
-## Demographics Percentage Breakdowns
+### Demographics Percentage Breakdowns
 Demographic percentages make it possible to compare the demographic distribution of different counties, while accounting for population density differences.<br>
 Ex. `df['Percent_male'] = df['TOT_MALE']/df['TOT_POP']`
 
-## Interaction Features
+### Interaction Features
 An interaction feature is created for each combination of continuous features, and the "best" performing features are added to the main dataframe, by running them in a simple OLS model and comparing R2 values. Interaction Features are derived using the following calculation:<br>
 `df[feature1+'_X_'+feature2] = df[feature1] * df[feature2]`<br>
 Interactions help to account for coexisting features - for example, someone of identity A ***and*** identity B may have a much greater chance of being food insecure than someone of only identity A ***or*** identity B
 
-## Log Transformations
+### Log Transformations
 Log features are created by taking the natural log of a feature, and adding this new feature to the dataframe. Log transformations can be useful to better model the shape of data that has very high outliers, by penalizing high values more than smaller ones.<br>
 
 ![img](images/scatter_Rent.png)
@@ -199,7 +198,7 @@ Log features are created by taking the natural log of a feature, and adding this
 
 The above images show scatter plots of Rent price vs. FI Rate, and **Log** Rent price vs. FI Rate. The log transformation penalizes the outliers present within the rent data, allowing the shape of the data to be better interpreted.
 
-## Dummy Variables
+### Dummy Variables
 Dummy variables are created for the categorical variables High and Low threshold, by using the Pandas `get_dummies()` function to turn them into 1's and 0's.
 
 # Feature Selection and Modeling 
@@ -284,23 +283,23 @@ View the ten highest coefficients alongside their corresponding features : <br>
 
 From the output, we see that houseless rates intersected with race are the highest predictors for food insecurity, which is not surprising after exploring the relationships between race, houselessness, and FI rates during the EDA process.
 
-## Visualize Predictions
-Model 5 is used to make predictions on 2018 data, and then presented alongside actual 2018 FI rates:
+## Predictions
+Model 5 is used to make predictions on 2018 data, which is mapped below alongside actual 2018 FI rates:
 
 ![img](images/2018preds_fi.png)
 ![img](images/2018_chor_FI.png)
 
 The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. <br>
-*Empty spaces indicate missing values due to a lack of data for one or more of the modeling features, for that county in the year 2018.*
+***Note:** Empty spaces indicate missing values due to a lack of data for one or more of the modeling features, for that county in the year 2018.*
 
-# Conclusion & Next Steps
+# Conclusion
 The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score of 0.0198. The most important features used in this model were shown to be `Unsheltered_rate_X_Percent_asian`, `Sheltered_rate_X_Percent_white`, `Sheltered_rate_X_Percent_Black`, `Houseless_rate_X_Percent_asian`, and `Unsheltered_rate_X_Percent_male`, based on model coefficients. 
 <br>**This indicates that both houselessness and race play a critical role in determining the likelihood of food insecurity, but especially so when these features interact** (ie. someone who is both Black and houseless.)<br>  
 
 The choropleth maps on 2018 FI Rate predictions indicate that the model was able to capture the general trend of food insecurity, particularly in places that are most impacted.
 
 
-### Next Steps
+## Next Steps
 There is a lot of room to improve the model's ability to explain even more variance in the data, potentially by adding more features such as household income, food assistance programs, age, disability, eviction data, and transportation access.<br><br>
 **The next iteration of this project aims to accomplish the following:**
 - include more features
