@@ -127,7 +127,7 @@ This question was explored by producing several chroropleth maps, which are heat
 Unemployment rates were at a record low in 2019 before the pandemic started, and shot up significantly in 2020, as can be seen by the maps above, which show a large increase in unemployment rates across the country, and especially on the coasts. 
 
 ### PoC Population Percentage by County, 2010 and 2018
-These maps aim to visualize which areas of the country whose populations are predominantly people of color.
+These maps help to visualize the areas of the United States whose populations are predominantly non-white.
 
 ![img](images/2010_chor_poc.png)
 ![img](images/2018_chor_poc.png)
@@ -140,7 +140,7 @@ The following maps visualize FI Rates by county in 2009 and 2018.
 ![img](images/2009_chor_FI.png)
 ![img](images/2018_chor_FI.png)
 
-The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that **while national averages for FI rates have gone down over time, these maps indicate that in some communities, this problem has actually been exacerbated over time.<br>
+The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that **while national averages for FI rates have gone down over time, these maps indicate that in some communities, this problem has actually been exacerbated over time.<br><br>
 When compared to the maps above which visualize communities of color, it is easy to see that the counties which are most severely effected by food insecurity very closely parallel the areas of the country that are predominantly non-white.**
 
 ## 3. Is there a relationship between food insecurity rate and other factors such as rent prices, unemployment, houselessness, and race?
@@ -176,8 +176,8 @@ The above histograms indicate a visually significant different in FI rates for d
 
 ## Data Analysis Summary
 This data analysis explores the above questions through the lens of time and geography.
-From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are **geographically** impacted most, as well as how these different features have changed **over time**. 
-<br>Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the above choropleth maps indicate that these factors have actually been exacerbated in certain geographic areas over time.<br><br>
+From the analysis, we see close relationships between FI Rates, unemployment rates, houseless rates, and race, both in terms of which areas are **geographically** impacted most, as well as how these different features have changed **over time**.<br>
+<br>Communities of color, particularly Black communities, as well as communities with high unemployment and houselessness are shown through this analysis to have the highest FI rates. In addition, while many features such as FI rate, unemployment, and houselessness have decreased over time *on average*, the above choropleth maps indicate that these factors have actually been *exacerbated* in certain geographic areas over time.<br><br>
 **The findings of this data exploration are meaningful when determining which communities and geographic areas are most at-risk for high food insecurity rates, and should be used both in terms of allocating resources to these communities, as well as taking proactive measures to address the root cause of these issues that disproportionately affect certain communities over others.**
 
 # Modeling Process
@@ -295,9 +295,9 @@ The maps above indicate that the model was able to capture the general trends of
 
 # Conclusion & Next Steps
 The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score of 0.0198. The most important features used in this model were shown to be `Unsheltered_rate_X_Percent_asian`, `Sheltered_rate_X_Percent_white`, `Sheltered_rate_X_Percent_Black`, `Houseless_rate_X_Percent_asian`, and `Unsheltered_rate_X_Percent_male`, based on model coefficients. 
-This indicates that both houselessness and race play a very critical role in determining the likelihood of food insecurity, *but especially so when they are combined* (ie. someone who is both Black and houseless.)<br>  
+<br>**This indicates that both houselessness and race play a critical role in determining the likelihood of food insecurity, but especially so when these features interact** (ie. someone who is both Black and houseless.)<br>  
 
-The choropleth maps on 2018 FI Rate predictions indicate that the model was able to capture the general trend of food insecurity, particularly in places that are hardest hit.
+The choropleth maps on 2018 FI Rate predictions indicate that the model was able to capture the general trend of food insecurity, particularly in places that are most impacted.
 
 
 ### Next Steps
