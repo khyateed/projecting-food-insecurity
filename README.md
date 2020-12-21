@@ -113,7 +113,7 @@ The above lineplots indicate that predominantly Black and Indigenous communities
 
 
 
-## 2. Which geographic areas experience the highest rates of unemployment, houselessness, food insecurity rates, and racial segregation?
+## Question 2. How do unemployment, race, and food insecurity rates vary geographically?
 The purpose of exploring this question is to gain a better understanding of the geographic component of food insecurity and related features.
 
 ### Choropleth Maps
@@ -143,10 +143,10 @@ The following maps visualize FI Rates by county in 2009 and 2018.
 The maps above indicate lower average food insecurity rates over time in some areas, such as the Pacific Northwest, and significantly higher rates in Southern counties. This is important to note, given that **while national averages for FI rates have gone down over time, these maps indicate that in some communities, this problem has actually been exacerbated over time.<br><br>
 When compared to the maps above which visualize communities of color, it is easy to see that the counties which are most severely effected by food insecurity very closely parallel the areas of the country that are predominantly non-white.**
 
-## 3. Is there a relationship between food insecurity rate and other factors such as rent prices, unemployment, houselessness, and race?
+## Question 3. What is the relationship between food insecurity rate and other factors such as rent prices, unemployment, houselessness, and race?
 The purpose of this final EDA question is to determine how the other features in the dataset, such as average rent prices and houselessness rates, directly relate to food insecurity rates. These observations will be important to keep in mind moving into the modeling process and looking at coefficients/feature importances.
 
-### FI Distribution, by Rent Prices
+### FI Rate Distribution, by Rent Prices
 The below histograms show the distribution of FI rates in areas with 1-br apartment rent prices above $2000, vs areas with rent prices below $1000.
 
 ![img](images/hist_fi_rent.png)
@@ -160,7 +160,7 @@ The following histograms plot FI rate distribution, by areas with unemployment r
 
 The above histograms show a visually significant difference in FI rates between areas based on unemployment rates. Areas with high unemployment rates have higher average FI Rates with a mean around 0.23, while areas with low unemployment rates have lower average FI rates averaging around 0.11. This is pretty intuitive, given that being unemployed is a likely cause of being unable to afford food.
 
-### FI Distributions, by Houseless Rates
+### FI Rate Distribution, by Houseless Rates
 The below histograms plot food insecurity distributions of areas with a houseless rate above %1, and areas with a houseless rate below %0.01.
 
 ![img](images/hist_fi_houseless.png)
