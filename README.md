@@ -291,7 +291,8 @@ Model 5 is used to make predictions on 2018 data, and then presented alongside a
 ![img](images/2018preds_fi.png)
 ![img](images/2018_chor_FI.png)
 
-The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. White areas are counties which contained missing values, due to a lack of data specific to a feature for the year 2018.
+The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. <br>
+*Empty spaces indicate missing values due to a lack of data for one or more of the modeling features, for that county in the year 2018.*
 
 # Conclusion & Next Steps
 The final RFE Model 5 was able to explain about 75% of the variance in the data, based on a cross validation R2 score of 0.7486, and was off on predictions by an average of 2%, based on Test RMSE score of 0.0198. The most important features used in this model were shown to be `Unsheltered_rate_X_Percent_asian`, `Sheltered_rate_X_Percent_white`, `Sheltered_rate_X_Percent_Black`, `Houseless_rate_X_Percent_asian`, and `Unsheltered_rate_X_Percent_male`, based on model coefficients. 
