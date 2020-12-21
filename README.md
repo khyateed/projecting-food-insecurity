@@ -2,7 +2,7 @@
 
 # Projecting Food Insecurity Rates in the US by County
 
-### Flatiron School Data Science Capstone Project<br>By Khyatee Desai
+### Flatiron School Data Science Capstone Project<br>By Khyatee Desai<br>Ongoing Dec. 2020 - Jan. 6, 2021
 
 # Overview
 Food insecurity (FI) is defined as the inability to consistently and reliably obtain enough food, due to a lack of resources. Food insecurity rates are one of the primary metrics used in determining how resources get distributed to communities through government assistance programs such as the Supplemental Nutrition Assistance Program (SNAP,) through non-profits organizations such as Feeding America, and through mutual-aid projects. <br><br>
@@ -268,7 +268,7 @@ Model 5 performs slightly better than the Select K Best model, with an average *
 
 # Model Evaluation
 Model 5, which used Recursive Feature Elimination was found to be the best MVP model. Below, we inspect model features and coefficients, and use the model to make predictions:
-## Model Coefficients
+## Coefficients
 View the ten highest coefficients alongside their corresponding features : <br> 
 `[(25148.43406913098, 'Unsheltered_rate'),`<br>
  `(25128.704386069712, 'Houseless_rate_X_Sheltered_rate'),`<br>
