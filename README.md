@@ -40,8 +40,8 @@ There are 54 datasets used to produce features for the MVP model, each of which 
 
 The following images depict the 2009 Businesses dataset before and after data cleaning.<br><br>
 **Before cleaning:**
-![img](images/before_cleaning.png)
-**After cleaning:**<br><br>
+![img](images/before_cleaning.png)<br><br>
+**After cleaning:**
 ![img](images/after_cleaning.png)
 
 
