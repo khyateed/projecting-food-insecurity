@@ -2,21 +2,29 @@
 # Projecting Food Insecurity Rates in the US
 # By Khyatee Desai
 
-
 # This .py file contains functions used in EDA.ipynb to generate lineplots, barcharts,
 # and choropleth maps.
 
-# import necessary packages
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import geopandas as gpd
 
 def lineplot(df, features, title=None):
-    '''input 1: dataframe
-       input 2: one or more features to be plotted (list)
-       input 3: (optional) title for chart
-       output: One or more overlayed lineplots'''
+    ''' Parameters
+        ----------
+        df : Pandas dataframe
+        features: list
+            one or more features to be plotted
+        title: str, optional
+            title for chart
+        
+        Yields
+        -------
+        matplotlib object
+            One or more overlayed lineplots'''
+    
     
     plt.figure(figsize=(20, 8));
     for feat in features:
@@ -32,13 +40,24 @@ def lineplot(df, features, title=None):
 #     plt.savefig('../images/line_'+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
 
 
+
 def barchart(df, features, title=None):
-    '''input 1: dataframe
-       input 2: one or more features to be plotted (list)
-       input 3: (optional) title for chart
-       output: One or more side-by-side barcharts'''
+    ''' Parameters
+        ----------
+        df : Pandas dataframe
+        features: list
+            one or more features to be plotted
+        title: str, optional
+            title for chart
+        
+        Yields
+        -------
+        matplotlib object
+            One or more side-by-side barcharts'''
     
+    # Create df for year
     plot_df = df.groupby("Year")[features].mean().fillna(0)
+    # Plot each feature specified in parameters
     for feat in features:
         plot_df[feat] =(plot_df[feat] - min(plot_df[feat])) / (max(plot_df[feat]) - min(plot_df[feat]))
     plot_df.plot(by='Year',kind='bar',fontsize=16,rot='horizontal',figsize=(25,10));
@@ -51,13 +70,24 @@ def barchart(df, features, title=None):
 #     plt.savefig('../images/bar_'+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
 
 def choropleth(df, feature, year, cmap, title=None):
-    '''input 1: dataframe
-       input 2: features to be plotted (string)
-       input 3: year for map (string)
-       input 4: color map palette (string) - look at seaborn documentation for options
-       input 5: (optional) title for chart
-       output: Choropleth map'''
-    
+    ''' Parameters
+        ----------
+        df : Pandas dataframe
+        feature : str
+            feature to be plotted
+        year : str
+            year to be used for mapping
+        cmap : str
+            color map palette - look at seaborn documentation for options
+        title : str, optional
+            title for chart
+        
+        Yields
+        -------
+        matplotlib object
+            Choropleth map for specified feature and year'''
+
+    # Create df specific to year parameter
     map_df = df[df.Year == year]
     # Read shapefile using Geopandas
     shape_df = gpd.read_file('../datasets/shapefile/cb_2018_us_county_500k.shp')
@@ -66,7 +96,9 @@ def choropleth(df, feature, year, cmap, title=None):
     ax.patch.set_alpha(0.0)
     vmin = geo_df[feature].min()
     vmax = geo_df[feature].max()
+    # Plot the geodataframe
     geo_df.plot(ax=ax, column =feature, cmap=cmap, legend = False,antialiased=False)
+    # Set tile based on parameter, otherwise use feature name
     if title:
         ax.set_title(title+", "+year, fontdict={'fontsize': 60}, loc='center')
     else:
@@ -81,7 +113,7 @@ def choropleth(df, feature, year, cmap, title=None):
     cbr.set_label(feature, size=45)
     cbr.ax.tick_params(labelsize=35) 
     ax.set_axis_off()
-    # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
+      # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
 #     plt.savefig('../images/'+year+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
 
 
