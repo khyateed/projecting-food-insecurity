@@ -69,14 +69,14 @@ def barchart(df, features, title=None):
     plt.title(title, fontdict={'fontsize':30});
 #     plt.savefig('../images/bar_'+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
 
-def choropleth(df, feature, year, cmap, title=None):
+def choropleth(df, feature, years, cmap, title=None):
     ''' Parameters
         ----------
         df : Pandas dataframe
         feature : str
             feature to be plotted
-        year : str
-            year to be used for mapping
+        year : list
+            list of years (str) to be used for mapping
         cmap : str
             color map palette - look at seaborn documentation for options
         title : str, optional
@@ -85,36 +85,37 @@ def choropleth(df, feature, year, cmap, title=None):
         Yields
         -------
         matplotlib object
-            Choropleth map for specified feature and year'''
+            Choropleth map(s) for specified feature and year(s)'''
 
-    # Create df specific to year parameter
-    map_df = df[df.Year == year]
-    # Read shapefile using Geopandas
-    shape_df = gpd.read_file('../datasets/shapefile/cb_2018_us_county_500k.shp')
-    geo_df = shape_df.merge(map_df, left_on='GEOID', right_on='FIPS')
-    fig, ax = plt.subplots(figsize = (40,40))
-    ax.patch.set_alpha(0.0)
-    vmin = geo_df[feature].min()
-    vmax = geo_df[feature].max()
-    # Plot the geodataframe
-    geo_df.plot(ax=ax, column =feature, cmap=cmap, legend = False,antialiased=False)
-    # Set tile based on parameter, otherwise use feature name
-    if title:
-        ax.set_title(title+", "+year, fontdict={'fontsize': 60}, loc='center')
-    else:
-        ax.set_title(feature+", "+year, fontdict={'fontsize': 60}, loc='center')
-    ax.set(xlim=(-126, -66), ylim=(24, 50));
-    plt.xticks([], [])
-    plt.yticks([], [])
-    cax = fig.add_axes([.95, 0.28, 0.02, 0.5])
-    sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=30))
-    sm._A = []
-    cbr = fig.colorbar(sm, cax=cax)
-    cbr.set_label(feature, size=45)
-    cbr.ax.tick_params(labelsize=35) 
-    ax.set_axis_off()
-      # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
-#     plt.savefig('../images/'+year+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
+    vmin = df[feature].min()
+    vmax = df[feature].max()
+    for year in years:
+        # Create df specific to year parameter
+        map_df = df[df.Year == year]
+        # Read shapefile using Geopandas
+        shape_df = gpd.read_file('../datasets/shapefile/cb_2018_us_county_500k.shp')
+        geo_df = shape_df.merge(map_df, left_on='GEOID', right_on='FIPS')
+        fig, ax = plt.subplots(figsize = (40,40))
+        ax.patch.set_alpha(0.0)
+        # Plot the geodataframe
+        geo_df.plot(ax=ax, column =feature, cmap=cmap, legend = False,antialiased=False)
+        # Set tile based on parameter, otherwise use feature name
+        if title:
+            ax.set_title(title+", "+year, fontdict={'fontsize': 60}, loc='center')
+        else:
+            ax.set_title(feature+", "+year, fontdict={'fontsize': 60}, loc='center')
+        ax.set(xlim=(-126, -66), ylim=(24, 50));
+        plt.xticks([], [])
+        plt.yticks([], [])
+        cax = fig.add_axes([.95, 0.28, 0.02, 0.5])
+        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=vmin, vmax=vmax))
+        sm._A = []
+        cbr = fig.colorbar(sm, cax=cax)
+        cbr.set_label(feature, size=45)
+        cbr.ax.tick_params(labelsize=35) 
+        ax.set_axis_off()
+          # ax.annotate("__Optional Annotation__", xy=(0.25, .1), size=20, xycoords='figure fraction')
+    #     plt.savefig('../images/'+year+title+'.png',format = 'png',bbox_inches='tight', transparent=True)
 
 
 
