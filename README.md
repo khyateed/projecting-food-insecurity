@@ -336,7 +336,7 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── income 
 │   ├── rent_prices
 │   ├── unemployment
-│	  └── shapefile
+│   └── shapefile
 ├── images				<- All images produced from EDA
 ├── pickled				<- Cleaned datasets and final model
 │   ├── partially_cleaned_data.pickle
