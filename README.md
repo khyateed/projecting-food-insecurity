@@ -2,7 +2,7 @@
 
 # Projecting Food Insecurity Rates in the US by County
 
-### Flatiron School Data Science Capstone Project<br>By Khyatee Desai<br>Ongoing Dec. 2020 - Jan. 6, 2021
+### Flatiron School Data Science Capstone Project<br>By Khyatee Desai<br>Jan. 6, 2021
 
 # Overview
 Food insecurity (FI) is defined as the inability to consistently and reliably obtain enough food, due to a lack of resources. Food insecurity rates are one of the primary metrics used in determining how resources get distributed to communities through government assistance programs such as the Supplemental Nutrition Assistance Program (SNAP,) through non-profits organizations such as Feeding America, and through mutual-aid projects. <br><br>
@@ -125,13 +125,13 @@ This question was explored by producing several chroropleth maps, which are heat
 
 Unemployment rates were at a record low in 2019 before the pandemic started, and shot up significantly in 2020, as can be seen by the maps above, which show a large increase in unemployment rates across the country, and especially on the coasts. 
 
-### PoC Population Percentage by County, 2010 and 2018
+### PoC Population Percentage by County, 2010 and 2020
 These maps help to visualize the areas of the United States whose populations are predominantly non-white.
 
 ![img](images/2010_chor_poc.png)
-![img](images/2018_chor_poc.png)
+![img](images/2020_chor_poc.png)
 
-The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2018.
+The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2020.
 
 ### Food Insecurity Rates by County, 2009 and 2018
 The following maps visualize FI Rates by county in 2009 and 2018.
@@ -325,7 +325,8 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── cleaning_pt2.ipynb		<- Final data cleaning process
 │   ├── EDA.ipynb			<- Data anlysis & visualization notebook
 │   ├── feature_engineering.ipynb
-│   ├── modeling.ipynb			<- Feature selection, modeling, and evaluation
+│   ├── modeling_process.ipynb			<- Feature selection and modeling
+│   ├── predictions.ipynb			<- Model evaluations and predictions
 ├── datasets				<- Directory of all datasets used 
 │   ├── businesses
 |	├── demographics
@@ -341,7 +342,6 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── partially_cleaned_data.pickle
 │   ├── fully_cleaned_data.pickle
 └   ├── feature_engineered_data.pickle
- modeling_process.ipynb
 ```
 
 
