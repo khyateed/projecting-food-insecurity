@@ -325,23 +325,23 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── cleaning_pt2.ipynb		<- Final data cleaning process
 │   ├── EDA.ipynb			<- Data anlysis & visualization notebook
 │   ├── feature_engineering.ipynb
-│   ├── modeling_process.ipynb			<- Feature selection and modeling
-│   ├── predictions.ipynb			<- Model evaluations and predictions
+│   ├── modeling_process.ipynb		<- Feature selection and modeling
+│   └── predictions.ipynb		<- Model evaluations and predictions
 ├── datasets				<- Directory of all datasets used 
 │   ├── businesses
-|	├── demographics
-|	├── feeding_america
-|	├── household
-|	├── houseless
-|	├── income 
-|	├── rent_prices
-|	├── unemployment
-|	├── shapefile
+|	  ├── demographics
+| 	├── feeding_america
+| 	├── household
+|  	├── houseless
+|	  ├── income 
+|	  ├── rent_prices
+| 	├── unemployment
+|	  └── shapefile
 ├── images				<- All images produced from EDA
 ├── pickled				<- Cleaned datasets and final model
 │   ├── partially_cleaned_data.pickle
 │   ├── fully_cleaned_data.pickle
-└   ├── feature_engineered_data.pickle
+└   └── feature_engineered_data.pickle
 ```
 
 
