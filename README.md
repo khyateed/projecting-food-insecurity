@@ -13,7 +13,7 @@ These organizations tend to prioritize resource allocation in the form of food, 
 Food insecurity, is not a phenomena that can be easily predicted, or even measure in real-time for two reasons: first, it is dependent upon a number of interwoven factors that can grow and change in unpredictable ways. Second, FI rate is a measure that is often determined retroactively, based on how food-assistance programs end up being utilized, and how survey respondents end up reporting their past food-related needs.<br><br>
 Currently, food insecurity rates for the past year are determined through the Current Population Survey (CPS,) which is a nationally representative survey conducted by the Census Bureau for the Bureau of Labor Statistics. In December of each year, 50,000 households respond to this survey, answering questions related to income, food spending, and the use of government and community food assistance programs, all of which are factored together to produce an annual food insecurity rate estimation.<br><br>
 While this annual survey provides incredibly valuable insight into the past needs of people at the community level, it does not inherently have the predictive capability to determine which communities will face the greatest impacts from food insecurity in the future, especially in the face of a worldwide pandemic that drastically impacts employment status, businesses, houselessness, and mobility.<br><br>
-**Therefore, the goal of this capstone project is to aid in a proactive solution to food insecurity, by using regression models to project current and future FI rates using closely linked indicators such as houselessness, food cost, race, and employment status.**
+**Therefore, the goal of this capstone project is to aid in a proactive solution to food insecurity, by using regression models to project current FI rates using closely linked indicators such as houselessness, food cost, race, and employment status.**
 
 # Data
 The datasets used for the MVP model come from six different sources and are each broken down into yearly datasets spanning the years 2009-2020:
@@ -26,9 +26,10 @@ The datasets used for the MVP model come from six different sources and are each
 | Houselessness Data   | US Dept. Housing & Urban Development (HUD) [Point in Time Estimates](https://www.hud.gov/2019-point-in-time-estimates-of-homelessness-in-US)      | This dataset contains data on houselessness rates in the US by Continuum of Care (CoC,) for the years 2009-2019.                                                                                                                                                                                                                                                                                                                                                                                                  |
 | Rent Prices     | [Zillow Observed Rent Index](https://www.zillow.com/research/data/)      | This dataset contains _monthly_ data from Zillow.com on 1-bedroom rent prices _by zipcode_, for the years 2014-2020. The data is produced using the **Zillow Observed Rent Index** (ZORI,) which is a smoothed measure of the typical observed market rate rent across a given region.                                                                                                                                                                                                                                                                                                                                                                                      |
 | Food Business Data           | US Census Bureau [County Business Patterns](https://www.census.gov/programs-surveys/cbp/data/datasets.html)      | This dataset contains data on all businesses in the US at the County level, for years 2009-2018. The dataset is used below to get Food Retail data, which includes grocery stores, wholesalers, and restaurants.                                                                                                                     |
+|Current Population Survey| US Census Bureau [CPS Datasets](https://www.census.gov/programs-surveys/cps/data/datasets.html) |The CPS and Basic Monthly CPS surveys provide information on households such as median income, household size, disability status, and healthcare coverage.
                                
 # Preprocessing
-There are 54 datasets used to produce features for the MVP model, each of which must undergo intensive pre-processing before EDA and modeling can occur.
+There are 55 datasets used to produce features for the MVP model, each of which must undergo intensive pre-processing before EDA and modeling can occur.
 -  import each dataset, which contains a folder of CSV files for each year, and standardize any differences between the years
 - preliminary cleaning, such as renaming columns for interpretability and dropping features not needed for EDA or modeling, such as unique ID numbers or metrics that are irrelevant to this project.
 - map coded columns to their corresponding columns using data dictionaries
@@ -79,6 +80,13 @@ This table describes each of the main features of the final cleaned dataset  (be
 |Employed | Total number of people within a county who are employed|float
 |Unemployed| Total number of people within a county who are unemployed | float
 |Unemployment_rate |Percent of the total workforce within a county that is unemployed|float|                                                                                                         |
+|hh_med_income|Household median income | float
+|pop_disabled|Number of respondents who are disabled|float|
+|pop_hs_grad|Number of respondents who graduated highschool|float|
+|pop_bachelors|Number of respondents with a bachelors degree|float|
+|pop_grad_degree|Number of respondents with a graduate degree|float|
+|pop_disabled|Number of respondents who are disabled|float|
+|pop_disabled|Number of respondents who are disabled|float|
 <br>
 
 For a detailed walkthrough of the cleaning process used to derive this cleaned dataset, please view data cleaning notebooks [part one](notebooks/cleaning_pt1.ipynb) and [part two](notebooks/cleaning_pt2.ipynb).
@@ -125,13 +133,13 @@ This question was explored by producing several chroropleth maps, which are heat
 
 Unemployment rates were at a record low in 2019 before the pandemic started, and shot up significantly in 2020, as can be seen by the maps above, which show a large increase in unemployment rates across the country, and especially on the coasts. 
 
-### PoC Population Percentage by County, 2010 and 2020
+### PoC Population Percentage by County, 2010 and 2018
 These maps help to visualize the areas of the United States whose populations are predominantly non-white.
 
 ![img](images/2010_chor_poc.png)
-![img](images/2020_chor_poc.png)
+![img](images/2018_chor_poc.png)
 
-The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2020.
+The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2018.
 
 ### Food Insecurity Rates by County, 2009 and 2018
 The following maps visualize FI Rates by county in 2009 and 2018.
@@ -320,29 +328,36 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 
 ```
 ├── README.md
+├── src
+│   ├── functions.py		<- Functions used in EDA notebook 
 ├── notebooks
 │   ├── cleaning_pt1.ipynb		<- Preliminary data collection and cleaning notebook
 │   ├── cleaning_pt2.ipynb		<- Final data cleaning process
 │   ├── EDA.ipynb			<- Data anlysis & visualization notebook
 │   ├── feature_engineering.ipynb
-│   ├── modeling_process.ipynb		<- Feature selection and modeling
-│   └── predictions.ipynb		<- Model evaluations and predictions
+│   ├── modeling_process.ipynb			<- Feature selection and modeling
+│   ├── predictons.ipynb			<- Model evaluation and predictions
 ├── datasets				<- Directory of all datasets used 
 │   ├── businesses
-│   ├── demographics
-│   ├── feeding_america
-│   ├── household
-│   ├── houseless
-│   ├── income 
-│   ├── rent_prices
-│   ├── unemployment
-│   └── shapefile
+|	├── cps
+|	├── demographics
+|	├── feeding_america
+|	├── household
+|	├── houseless
+|	├── income 
+|	├── rent_prices
+|	├── unemployment
+|	├── shapefile
 ├── images				<- All images produced from EDA
 ├── pickled				<- Cleaned datasets and final model
-│   ├── partially_cleaned_data.pickle
 │   ├── fully_cleaned_data.pickle
-└   └── feature_engineered_data.pickle
+│   ├── feature_engineered_data.pickle
+│   ├── rfe_features.pickle
+└   ├── random_forest_model.pickle
 ```
+
+
+
 
 
 
