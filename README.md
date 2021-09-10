@@ -133,11 +133,11 @@ This question was explored by producing several chroropleth maps, which are heat
 
 Unemployment rates were at a record low in 2019 before the pandemic started, and shot up significantly in 2020, as can be seen by the maps above, which show a large increase in unemployment rates across the country, and especially on the coasts. 
 
-### PoC Population Percentage by County, 2010 and 2018
+### PoC Population Percentage by County, 2010 and 2020
 These maps help to visualize the areas of the United States whose populations are predominantly non-white.
 
 ![img](images/2010_chor_poc.png)
-![img](images/2018_chor_poc.png)
+![img](images/2020_chor_poc.png)
 
 The above maps indicate that while the majority of US counties are predominantly white, there are significant areas, such as much of the southern states and portions of the Southwest that are predominantly communities of Color. There does not seem to be a significant change in this demographic spread between 2010 and 2018.
 
