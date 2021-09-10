@@ -318,7 +318,7 @@ There is a lot of room to improve the model's ability to explain even more varia
 
 ## More Information
 
-To explore the full project, please view the Jupyter Notebook files within the `notebooks/` folder, and the [presentation](slide_deck.pdf) PDF document in the root of this repository.
+To explore the full project, please view the Jupyter Notebook files within the `notebooks/` folder, and the [presentation](presentation_slides.pdf) PDF document in the root of this repository.
 
 For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.com**
 
