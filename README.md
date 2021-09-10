@@ -294,7 +294,7 @@ From the output, we see that houseless rates intersected with race are the highe
 ## Predictions
 Model 5 is used to make predictions on 2018 data, which is mapped below alongside actual 2018 FI rates:
 
-![img](images/2018preds_fi.png)
+![img](images/2018_MVP_preds_.png)
 ![img](images/2018_chor_FI.png)
 
 The maps above indicate that the model was able to capture the general trends of food insecurity, especially in places which are the most significantly impacted. The model did not perform as well at capturing the severity of FI rates in certain areas, such as Maine, the Pacific Northwest, and the Southeast. <br>
