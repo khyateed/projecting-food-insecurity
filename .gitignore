@@ -17,3 +17,6 @@ ipython_config.py
 datasets/
 pickled/partially_cleaned_data.pickle
 pickled/feature_engineered_data.pickle
+
+# presentation video
+Capstone_Presenations.mp4
