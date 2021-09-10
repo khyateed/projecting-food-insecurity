@@ -335,8 +335,8 @@ For any additional questions, please contact **Khyatee Desai - khyatee.d@gmail.c
 │   ├── cleaning_pt2.ipynb		<- Final data cleaning process
 │   ├── EDA.ipynb			<- Data anlysis & visualization notebook
 │   ├── feature_engineering.ipynb
-│   ├── modeling_process.ipynb      <- Feature selection and modeling
-│   ├── predictons.ipynb      <- Model evaluation and predictions
+│   ├── modeling_process.ipynb        <- Feature selection and modeling
+│   ├── predictons.ipynb        <- Model evaluation and predictions
 ├── datasets				<- Directory of all datasets used 
 │   ├── businesses
 |	├── cps
